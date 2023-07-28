@@ -13,7 +13,7 @@ const PORT = process.env.PORT || process.env.PORT || 4312;
 
 import db = mongoose.connection;
 
-const url = "mongodb://127.0.0.1:27017/stock";
+const url = "mongodb+srv://admin:88BiGBmy8qHMIFJ9@cluster0.vkcyrlf.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(url);
 
 db.on("error", (error: Error) => console.log(error));
