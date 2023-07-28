@@ -59,7 +59,7 @@ app.use('/products', productRouter)
 app.use('/users', usersRouter)
 app.use('/sales', salesRouter)
 app.use('/capital', capitalRouter)
-
+app.use(errorHandler);
 app.listen(PORT, () => {
   console.log("listening on port");
 });
