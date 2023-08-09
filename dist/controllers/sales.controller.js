@@ -20,11 +20,23 @@ const addSale = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     const { productId, quantity, moneyGot, transportationCost } = req.body;
     try {
         const theProduct = yield product_service_1.default.getProductById(productId);
+        if (!theProduct) {
+            return res.status(400).send({
+                status: 200,
+                statusMessage: "Invalid Product Id",
+            });
+        }
+        if ((theProduct === null || theProduct === void 0 ? void 0 : theProduct.quantityLeft) < 1) {
+            return res.status(400).send({
+                status: 200,
+                statusMessage: "This Product is Finished",
+            });
+        }
         yield sales_service_1.default
             .addSale(productId, theProduct.productName, quantity, moneyGot, transportationCost)
             .then(() => __awaiter(void 0, void 0, void 0, function* () {
             let left = (theProduct === null || theProduct === void 0 ? void 0 : theProduct.quantityLeft) - quantity;
-            let got = (theProduct === null || theProduct === void 0 ? void 0 : theProduct.amountSold) + moneyGot;
+            let got = (theProduct === null || theProduct === void 0 ? void 0 : theProduct.amountSold) + Number(moneyGot);
             yield product_service_1.default.updateProductAfterSale(productId, left, got);
             return res.status(201).send({
                 status: 200,

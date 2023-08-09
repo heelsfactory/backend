@@ -10,6 +10,20 @@ const addSale = async (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const theProduct = await productService.getProductById(productId);
+
+    if (!theProduct){
+      return res.status(400).send({
+        status: 200,
+        statusMessage: "Invalid Product Id",
+      })
+    }
+
+    if (theProduct?.quantityLeft! < 1){
+      return res.status(400).send({
+        status: 200,
+        statusMessage: "This Product is Finished",
+      })
+    }
     await saleService
       .addSale(
         productId,
@@ -20,7 +34,7 @@ const addSale = async (req: Request, res: Response, next: NextFunction) => {
       )
       .then(async () => {
         let left = theProduct?.quantityLeft! - quantity;
-        let got = theProduct?.amountSold + moneyGot;
+        let got = theProduct?.amountSold + Number(moneyGot);
 
         await productService.updateProductAfterSale(productId, left, got);
         return res.status(201).send({

@@ -42,7 +42,7 @@ const fetchProducts = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         yield product_service_1.default
             .findAllProducts()
             .then((products) => {
-            console.log(products);
+            // console.log(products)
             return res.status(200).send({
                 status: 200,
                 statusMessage: "Products fetched successfully",

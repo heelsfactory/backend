@@ -14,7 +14,7 @@ const capital_routes_1 = __importDefault(require("./routers/capital.routes"));
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || process.env.PORT || 4312;
 var db = mongoose_1.default.connection;
-const url = "mongodb://127.0.0.1:27017/stock";
+const url = "mongodb+srv://admin:88BiGBmy8qHMIFJ9@cluster0.vkcyrlf.mongodb.net/?retryWrites=true&w=majority";
 mongoose_1.default.connect(url);
 db.on("error", (error) => console.log(error));
 db.once("open", () => console.log("DATABASE CONNECTED ⚡"));
@@ -48,6 +48,7 @@ app.use('/products', product_routes_1.default);
 app.use('/users', users_routes_1.default);
 app.use('/sales', sales_routes_1.default);
 app.use('/capital', capital_routes_1.default);
+app.use(errorHandler);
 app.listen(PORT, () => {
     console.log("listening on port");
 });

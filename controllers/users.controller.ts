@@ -27,7 +27,23 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     next(error);
   }
-}; 
+};
 
+const creasteUser = async (req: Request, res: Response, next: NextFunction) => {
+  const { username, password } = req.body;
 
-export default login
+  try {
+    await userService
+      .addUser(username, password)
+      .then((response) => {
+        return res.status(200).send(response);
+      })
+      .catch((error) => {
+        next(error);
+      });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { login, creasteUser };

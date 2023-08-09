@@ -9,5 +9,5 @@ const router = express_1.default.Router();
 router.post("/create-product", product_controller_1.createProduct);
 router.get("/fetch-products", product_controller_1.fetchProducts);
 router.post("/fetch-product", product_controller_1.fetchProductById);
-router.get("/delete", product_controller_1.deleteProductById);
+router.post("/delete", product_controller_1.deleteProductById);
 exports.default = router;

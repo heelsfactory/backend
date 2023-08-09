@@ -15,6 +15,15 @@ const userService = {
         return __awaiter(this, void 0, void 0, function* () {
             return yield user_model_1.User.findOne({ username: username });
         });
+    },
+    addUser(username, password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const newUser = new user_model_1.User({
+                username,
+                password
+            });
+            return newUser.save();
+        });
     }
 };
 exports.default = userService;
