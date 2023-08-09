@@ -33,8 +33,17 @@ const addSale = async (req: Request, res: Response, next: NextFunction) => {
         transportationCost
       )
       .then(async () => {
-        let left = theProduct?.quantityLeft! - quantity;
+        let left = theProduct?.quantityLeft! - Number(quantity);
         let got = theProduct?.amountSold + Number(moneyGot);
+
+        console.log(typeof (quantity))
+        console.log(theProduct?.quantityLeft!)
+        console.log("quantity left",theProduct?.quantityLeft!)
+        console.log(typeof(theProduct?.quantityLeft!))
+
+        console.log("amount gotten", moneyGot )
+
+
 
         await productService.updateProductAfterSale(productId, left, got);
         return res.status(201).send({
