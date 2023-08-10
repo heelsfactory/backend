@@ -24,6 +24,15 @@ const addSale = async (req: Request, res: Response, next: NextFunction) => {
         statusMessage: "This Product is Finished",
       })
     }
+
+    if (theProduct?.quantityLeft < quantity){
+      return res.status(400).send({
+        status: 500,
+        statusMessage: "Don't have this many products",
+      })
+    }
+
+    
     await saleService
       .addSale(
         productId,
